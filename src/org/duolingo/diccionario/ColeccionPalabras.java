@@ -23,4 +23,23 @@ public class ColeccionPalabras {
       }
     }
   }
+
+  public static void eliminarPalabraColeccion(){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Ingrese palabra a eliminar: ");
+    String palabraEliminar = scanner.nextLine().toLowerCase();
+    String letraInicial = palabraEliminar.substring(0, 1);
+    
+    if (coleccionPalabras.containsKey(letraInicial)){
+      Set<String> palabras = coleccionPalabras.get(letraInicial);
+      if (palabras.contains(palabraEliminar)) {
+        palabras.remove(palabraEliminar);
+        System.out.println("Palabra '" + palabraEliminar + "' eliminada de la colección");
+      } else {
+        System.out.println("La palabra '" + palabraEliminar + "' no está en la colección");
+      }
+    } else {
+    System.out.println("No se encontraron palabras que comiencen con '" + letraInicial + "'");
+    }
+  }
 }

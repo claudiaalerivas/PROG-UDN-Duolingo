@@ -69,4 +69,21 @@ public class ColeccionPalabras {
     }
   }
   
+  public static void existenciaPalabra(){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Introduce palabra para validar si la palabra existe en la coleccion");
+    String palabraUsuario = scanner.nextLine().toLowerCase();
+    String letraInicial = palabraUsuario.substring(0, 1);
+
+    if(coleccionPalabras.containsKey(letraInicial)){
+      Set<String> palabras = coleccionPalabras.get(letraInicial);
+      if (palabras.contains(palabraUsuario)) {
+        System.out.println("La palabra '" + palabraUsuario + "' existe en la colección");
+      } else {
+        System.out.println("La palabra '" + palabraUsuario + "' no existe en la colección");
+      }
+    } else {
+      System.out.println("No se encontraron palabras que comiencen con '" + letraInicial + "'");
+    }
+  }
 }

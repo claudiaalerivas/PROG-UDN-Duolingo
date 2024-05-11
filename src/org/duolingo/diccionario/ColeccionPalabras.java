@@ -1,6 +1,7 @@
 package org.duolingo.diccionario;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -42,4 +43,30 @@ public class ColeccionPalabras {
     System.out.println("No se encontraron palabras que comiencen con '" + letraInicial + "'");
     }
   }
+
+  public static void mostrarIniciales(){
+    System.out.println("Iniciales Almacenadas: " + coleccionPalabras.keySet());
+  } 
+  
+  public static void ingresarPalabrasColeccion(){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Ingresa Palabra que quieres añadir a la coleccion");
+    String palabraUsuario = scanner.nextLine().toLowerCase();
+    String pattern = "\\s+(\\*)\\s+|\\s+";
+    palabraUsuario = palabraUsuario.replaceAll(pattern, "");
+    String letraInicial = palabraUsuario.substring(0, 1);
+    if (coleccionPalabras.containsKey(letraInicial) && coleccionPalabras.get(letraInicial).size() >= 1) {
+      Set<String> auxiliar = coleccionPalabras.get(letraInicial);
+      for(String elemento : auxiliar){
+        if(palabraUsuario.equals(elemento)){
+          System.out.println("La palabra existe");
+        } 
+      }
+    } else {
+      Set<String> palabras = coleccionPalabras.computeIfAbsent(letraInicial, k -> new HashSet<>());
+      palabras.add(palabraUsuario);
+      System.out.println("Palabra '" + palabraUsuario + "' ingresada en la colección");
+    }
+  }
+  
 }
